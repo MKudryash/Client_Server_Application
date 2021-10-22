@@ -23,6 +23,8 @@
                 <GroupBox Header="Качества личности">
                     <ListBox Name="lbTraits" Loaded="lbTraits_Loaded" Uid="{Binding id}"/>
                  </GroupBox>
+                <Button Content="Изменить" x:Name="Changebtn" Click="Changebtn_Click" Uid="{Binding id}" />
+                <Button Content="Удалить" x:Name="Delbtn" Click="Delbtn_Click" Uid="{Binding id}"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -40,6 +42,8 @@
             </GroupBox>
             <Button Name="btnGo" Content="Вывести" Click="btnGo_Click" Width="80" Margin="5"/>
             <Button Name="btnReset" Content="Сброс" Click="btnReset_Click" Width="80" Margin="5"/>
+            <Button Name="btnNewUser" Content="Новый пользователь" Click="btnNewUser_Click" Width="163" Margin="5"/>
+            <Button Name="btnExit" Content="Выход" Click="btnExit_Click" Width="80" Margin="5"/>
         </StackPanel>
         <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1"/>
     </Grid>

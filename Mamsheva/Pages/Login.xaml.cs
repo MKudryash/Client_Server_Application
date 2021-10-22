@@ -33,9 +33,7 @@ namespace Mamsheva.Pages
                             MessageBox.Show("Вы вошли как пользователь");
                             LoadPages.MainFrame.Navigate(new Info(CurrentUser));
                             break;
-
                     }
-
                 }
                 else
                 {

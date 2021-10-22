@@ -37,7 +37,10 @@ namespace Mamsheva.Pages
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-
+            auth SelectedUser = (auth)dgUsers.SelectedItem;
+            int id = SelectedUser.id;
+            auth tUser = BaseConnect.BaseModel.auth.FirstOrDefault(x => x.id == id);
+            LoadPages.MainFrame.Navigate(new ChangeUser(tUser));
         }
 
     }

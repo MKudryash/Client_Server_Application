@@ -10,13 +10,13 @@
         <Style TargetType="TextBlock" x:Key="zagolovok">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontFamily" Value="Bahnschrift"/>
-            <Setter Property="Foreground" Value="#A68800"/>
+            <Setter Property="Foreground" Value="#842827"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="reklama" BasedOn ="{StaticResource reklama}">
             <Setter Property="FontSize" Value="30" />
             <Setter Property="FontFamily" Value="Bahnschrift"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="#1D0772"/>
+            <Setter Property="Foreground" Value="#842827"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -31,10 +31,10 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
            <DockPanel Grid.ColumnSpan="2" LastChildFill="True">
-                <Image Source="/Image/2.png" DockPanel.Dock="Left"/>
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource zagolovok}" DockPanel.Dock="Top"><Run Text="Клиент - Серверное"/><Run Text=" "/><Run Text="Приложение"/></TextBlock>
+                <Image Source="/Image/Yaht.jpg" DockPanel.Dock="Left"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource zagolovok}" DockPanel.Dock="Top"><Run Text="Клиент - Серверное"/><Run Text=" "/><Run Text="Приложение"/></TextBlock>
         </DockPanel>
-        <TextBlock Text="Какой-то текст для какой-то рекламы" Grid.ColumnSpan="2" Grid.Row="2" Style="{StaticResource reklama}" FontSize="20"/>
+        <TextBlock Text="Здесь возможно есть какой-то текст для какой-то рекламы" Grid.ColumnSpan="2" Grid.Row="2" Style="{StaticResource reklama}" FontSize="20"/>
         <Image Source="/Image/1.jpg" Grid.Row="1"/>
             <Frame Name="frmMain" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>

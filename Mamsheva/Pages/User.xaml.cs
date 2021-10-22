@@ -39,5 +39,33 @@ namespace Mamsheva.Pages
             txtDO.Clear();
             txtOT.Clear();
         }
+        private void Changebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            int id = Convert.ToInt32(b.Uid);
+            auth tUser = BaseConnect.BaseModel.auth.FirstOrDefault(x => x.id == id);
+            LoadPages.MainFrame.Navigate(new ChangeUser(tUser));
+        }
+
+        private void Delbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            int id = Convert.ToInt32(b.Uid);
+            auth DellUs = BaseConnect.BaseModel.auth.FirstOrDefault(x => x.id == id);
+            BaseConnect.BaseModel.auth.Remove(DellUs);
+            BaseConnect.BaseModel.SaveChanges();
+            MessageBox.Show("Пользователь удален!");
+            TimeSpan.FromSeconds(3);
+            lbUsersList.ItemsSource = BaseConnect.BaseModel.users.ToList();
+        }
+        private void btnNewUser_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.MainFrame.Navigate(new Registration());
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.MainFrame.GoBack();
+        }
     }
 }

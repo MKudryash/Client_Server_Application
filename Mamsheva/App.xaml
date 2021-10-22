@@ -7,12 +7,13 @@
         <Style TargetType="GroupBox" >
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="Foreground" Value="#842827"/>
         </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontFamily" Value="Bahnschrift"/>
-            <Setter Property="Background" Value="#1D0772"/>
-            <Setter Property="Foreground" Value="#A68800"/>
+            <Setter Property="Background" Value="#878787"/>
+            <Setter Property="Foreground" Value="#842827"/>
             <Setter Property="BorderBrush" Value="#FF8AEC68"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -31,11 +32,11 @@
         </Style>
 
         <Style TargetType="TextBlock" x:Key="reklama">
-            <Setter Property="Background" Value="#A68800"/>
+            <Setter Property="Background" Value="#878787"/>
         </Style>
         
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="Brown"/>
+            <Setter Property="Foreground" Value="#842827"/>
         </Style>
     </Application.Resources>
 </Application>
