@@ -1,0 +1,35 @@
+﻿<Page x:Class="Mamsheva.Pages.Info"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mamsheva.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Info">
+
+    <Grid>
+        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <GroupBox Header="Информация о пользователе" Margin="20">
+                    <StackPanel>
+                        <GroupBox Header="Имя">
+                            <TextBlock x:Name="tbName"/>
+                        </GroupBox>
+                        <GroupBox Header="Дата рождения">
+                            <TextBlock x:Name="tbDR" />
+                        </GroupBox>
+                        <GroupBox Header="Пол">
+                            <TextBlock  x:Name="tbGender"/>
+                        </GroupBox>
+                        <GroupBox Header="Качества личности">
+                            <TextBlock x:Name="tbTraits" />
+                        </GroupBox>
+
+                        <Button Content="Назад" Name="btnBack" Click="btnBack_Click"/>
+                    </StackPanel>
+                </GroupBox>
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
