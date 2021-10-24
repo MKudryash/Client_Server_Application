@@ -26,7 +26,7 @@ namespace Mamsheva.Pages
                     {
                         case 1:
                             MessageBox.Show("Вы вошли как администратор");
-                            LoadPages.MainFrame.Navigate(new AdminMenu());
+                            LoadPages.MainFrame.Navigate(new User());
                             break;
                         case 2:
                         default:

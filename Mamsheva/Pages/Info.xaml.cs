@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ namespace Mamsheva.Pages
     /// </summary>
     public partial class Info : Page
     {
+       
         public Info(auth CurrentUser)
         {
             InitializeComponent();
