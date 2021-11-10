@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Mamsheva.Pages
 {
@@ -14,6 +15,7 @@ namespace Mamsheva.Pages
     {
         List<users> users;
         List<users> lu1;
+        ChangePage changePage = new ChangePage();
         public User()
         {
             InitializeComponent();
@@ -23,6 +25,7 @@ namespace Mamsheva.Pages
             lbGenderFilter.SelectedValuePath = "id";
             lbGenderFilter.DisplayMemberPath = "gender";
             lu1 = users;
+            DataContext = changePage;
         }
         private void lbTraits_Loaded(object sender, RoutedEventArgs e)
         {
@@ -52,12 +55,14 @@ namespace Mamsheva.Pages
                 lu1 = lu1.Where(x => x.name.Contains(txtNameFilter.Text)).ToList();
             }
             lbUsersList.ItemsSource = lu1;
+            changePage.Countlist = lu1.Count;
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             lbUsersList.ItemsSource = users;
-            lbGenderFilter.SelectedIndex = -1; //сбрасываем выбранный элемент списка
+            lu1 = users;
+            lbGenderFilter.SelectedIndex = -1; 
             txtNameFilter.Clear();
             txtDO.Clear();
             txtOT.Clear();
@@ -65,95 +70,59 @@ namespace Mamsheva.Pages
         int currentpage = 1;
         private void GoPage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            TextBlock tb = (TextBlock)sender;//определяем, какой текстовый блок был нажат
-            int countlist = users.Count;//определяем общее колисество пользователей
-            int countpage = Convert.ToInt32(txtPageCount.Text);//количество записей на странице
-            int countpages = countlist / countpage;//количество страниц
-            //изменение номера страници при нажатии на кнопку
-            switch (tb.Uid)// в зависимости от нажатой кнопки
+            TextBlock tb = (TextBlock)sender;
+            switch (tb.Uid)
             {
                 case "prev":
-                    currentpage--;
-                    break;
-                case "1":
-                    if (currentpage < 3) currentpage = 1;
-                    else if (currentpage > countpages - 2) currentpage = countpages - 4;
-                    else currentpage -= 2;
-                    break;
-                case "2":
-                    if (currentpage < 3) currentpage = 2;
-                    else if (currentpage > countpages - 2) currentpage = countpages - 3;
-                    else currentpage--;
-                    break;
-                case "3":
-                    if (currentpage < 3) currentpage = 3;
-                    else if (currentpage > countpages - 2) currentpage = countpages - 2;
-                    break;
-                case "4":
-                    if (currentpage < 3) currentpage = 4;
-                    else if (currentpage > countpages - 2) currentpage = countpages - 1;
-                    else currentpage++;
-                    break;
-                case "5":
-                    if (currentpage < 3) currentpage = 5;
-                    else if (currentpage > countpages - 2) currentpage = countpages;
-                    else currentpage += 2;
+                    changePage.CurrentPage--;
                     break;
                 case "next":
-                    currentpage++;
+                    changePage.CurrentPage++;
                     break;
                 default:
-                    currentpage = 1;
+                    changePage.CurrentPage = Convert.ToInt32(tb.Text);
                     break;
             }
-            //ограничение на выход за пределы страницы
-            if (currentpage < 1) currentpage = 1;
-            if (currentpage >= countpages) currentpage = countpages;
 
-            //изменение номера страницы в значении текстового поля (отрисовка)
-            if (currentpage < 3)
-            {
-                txt1.Text = " 1 ";
-                txt2.Text = " 2 ";
-                txt3.Text = " 3 ";
-                txt4.Text = " 4 ";
-                txt5.Text = " 5 ";
-            }
-            else if (currentpage > countpages - 2)
-            {
-                txt1.Text = " " + (countpages - 4).ToString() + " ";
-                txt2.Text = " " + (countpages - 3).ToString() + " ";
-                txt3.Text = " " + (countpages - 2).ToString() + " ";
-                txt4.Text = " " + (countpages - 1).ToString() + " ";
-                txt5.Text = " " + (countpages).ToString() + " ";
-            }
-            else
-            {
-                txt1.Text = " " + (currentpage - 2).ToString() + " ";
-                txt2.Text = " " + (currentpage - 1).ToString() + " ";
-                txt3.Text = " " + (currentpage).ToString() + " ";
-                txt4.Text = " " + (currentpage + 1).ToString() + " ";
-                txt5.Text = " " + (currentpage + 2).ToString() + " ";
-            }
-            txtCurrentPage.Text = "Текущая страница: " + (currentpage).ToString();
+            lbUsersList.ItemsSource = lu1.Skip(changePage.CurrentPage * changePage.CountPage - changePage.CountPage).Take(changePage.CountPage).ToList();
 
-            //изменение списка пользователей
-            lu1 = users.Skip(currentpage * countpage - countpage).Take(countpage).ToList();
-            lbUsersList.ItemsSource = lu1;
+            txtCurrentPage.Text = "Текущая страница: " + (changePage.CurrentPage).ToString();
         }
 
         private void txtPageCount_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
-                lu1 = users.Take(Convert.ToInt32(txtPageCount.Text)).ToList();
-                lbUsersList.ItemsSource = lu1;
+                changePage.CountPage = Convert.ToInt32(txtPageCount.Text);
             }
             catch
             {
+                changePage.CountPage = lu1.Count;
+            }
+            changePage.Countlist = users.Count;
+            lbUsersList.ItemsSource = lu1.Skip(0).Take(changePage.CountPage).ToList();
 
+        }
+        private void UserImage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Image IMG = sender as Image;
+            int ind = Convert.ToInt32(IMG.Uid);
+            users U = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == ind);
+            BitmapImage BI;
+            switch (U.gender)
+            {
+                case 1:
+                    BI = new BitmapImage(new Uri(@"/Image/man.png", UriKind.Relative));
+                    break;
+                case 2:
+                    BI = new BitmapImage(new Uri(@"/Image/woman.png", UriKind.Relative));
+                    break;
+                default:
+                    BI = new BitmapImage(new Uri(@"/Image/Other.png", UriKind.Relative));
+                    break;
             }
 
+            IMG.Source = BI;//помещаем картинку в image
         }
         private void Changebtn_Click(object sender, RoutedEventArgs e)
         {

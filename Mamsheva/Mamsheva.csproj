@@ -72,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Base.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChangePage.cs" />
     <Compile Include="genders.cs">
       <DependentUpon>Base.tt</DependentUpon>
     </Compile>
@@ -218,6 +219,9 @@
       <DependentUpon>Base.edmx</DependentUpon>
       <LastGenOutput>Base.cs</LastGenOutput>
     </Content>
+    <Resource Include="Image\man.png" />
+    <Resource Include="Image\woman.png" />
+    <Resource Include="Image\Other.png" />
     <Resource Include="Image\Yaht.jpg" />
   </ItemGroup>
   <ItemGroup>
