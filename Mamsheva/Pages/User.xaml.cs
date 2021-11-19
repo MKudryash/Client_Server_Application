@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,8 +46,7 @@ namespace Mamsheva.Pages
                 lu1 = users.Skip(OT).Take(DO - OT).ToList();
             }
             catch
-            {
-              
+            {             
             }
             if (lbGenderFilter.SelectedValue != null)
             {
@@ -67,7 +69,6 @@ namespace Mamsheva.Pages
             txtDO.Clear();
             txtOT.Clear();
         }
-        int currentpage = 1;
         private void GoPage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             TextBlock tb = (TextBlock)sender;
@@ -105,24 +106,40 @@ namespace Mamsheva.Pages
         }
         private void UserImage_Loaded(object sender, RoutedEventArgs e)
         {
-            Image IMG = sender as Image;
+            System.Windows.Controls.Image IMG = sender as System.Windows.Controls.Image;
             int ind = Convert.ToInt32(IMG.Uid);
             users U = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == ind);
-            BitmapImage BI;
-            switch (U.gender)
+            usersimage UI = BaseConnect.BaseModel.usersimage.FirstOrDefault(x => x.id_user == ind);
+            BitmapImage BI = new BitmapImage();
+            if (UI != null)
             {
-                case 1:
-                    BI = new BitmapImage(new Uri(@"/Image/man.png", UriKind.Relative));
-                    break;
-                case 2:
-                    BI = new BitmapImage(new Uri(@"/Image/woman.png", UriKind.Relative));
-                    break;
-                default:
-                    BI = new BitmapImage(new Uri(@"/Image/Other.png", UriKind.Relative));
-                    break;
+                if (UI.path != null)
+                {
+                    BI = new BitmapImage(new Uri(UI.path, UriKind.Relative));
+                }
+                else
+                {
+                    BI.BeginInit();
+                    BI.StreamSource = new MemoryStream(UI.image);
+                    BI.EndInit();
+                }
             }
-
-            IMG.Source = BI;//помещаем картинку в image
+            else
+            {
+                switch (U.gender)
+                {
+                    case 1:
+                        BI = new BitmapImage(new Uri(@"/Image/man.png", UriKind.Relative));
+                        break;
+                    case 2:
+                        BI = new BitmapImage(new Uri(@"/Image/woman.png", UriKind.Relative));
+                        break;
+                    default:
+                        BI = new BitmapImage(new Uri(@"/Image/other.png", UriKind.Relative));
+                        break;
+                }
+            }
+            IMG.Source = BI;
         }
         private void Changebtn_Click(object sender, RoutedEventArgs e)
         {
@@ -143,5 +160,45 @@ namespace Mamsheva.Pages
             TimeSpan.FromSeconds(3);
             lbUsersList.ItemsSource = BaseConnect.BaseModel.users.ToList();
         }
+        private void BtmAddImage_Click(object sender, RoutedEventArgs e)
+        {
+            Button BTN = (Button)sender;
+            int ind = Convert.ToInt32(BTN.Uid);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".jpg"; // задаем расширение по умолчанию
+            openFileDialog.Filter = "Изображения |*.jpg;*.png"; // задаем фильтр на форматы файлов
+            var result = openFileDialog.ShowDialog();
+            if (result == true)//если файл выбран
+            {
+                System.Drawing.Image UserImage = System.Drawing.Image.FromFile(openFileDialog.FileName);//создаем изображение
+                ImageConverter IC = new ImageConverter();//конвертер изображения в массив байт
+                byte[] ByteArr = (byte[])IC.ConvertTo(UserImage, typeof(byte[]));//непосредственно конвертация
+                usersimage UI = new usersimage() { id_user = ind, image = ByteArr };//создаем новый объект usersimage
+                BaseConnect.BaseModel.usersimage.Add(UI);//добавляем его в модель
+                BaseConnect.BaseModel.SaveChanges();//синхронизируем с базой
+                MessageBox.Show("картинка пользователя добавлена в базу");
+            }
+            else
+            {
+                MessageBox.Show("операция выбора изображения отменена");
+            }
+        }
+        private void Sort_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton RB = (RadioButton)sender;
+            switch (RB.Uid)
+            {
+                case "name":
+                    lu1 = lu1.OrderBy(x => x.name).ToList();
+                    break;
+                case "DR":
+                    lu1 = lu1.OrderBy(x => x.dr).ToList();
+                    break;
+            }
+            if (RBReverse.IsChecked == true) lu1.Reverse();
+            lbUsersList.ItemsSource = lu1;
+        }
+
+      
     }
 }

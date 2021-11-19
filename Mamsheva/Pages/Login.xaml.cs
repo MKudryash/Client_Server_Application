@@ -31,7 +31,7 @@ namespace Mamsheva.Pages
                         case 2:
                         default:
                             MessageBox.Show("Вы вошли как пользователь");
-                            LoadPages.MainFrame.Navigate(new Info(CurrentUser));
+                            LoadPages.MainFrame.Navigate(new ChangeUser(CurrentUser));
                             break;
                     }
                 }

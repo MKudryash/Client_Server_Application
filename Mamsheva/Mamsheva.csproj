@@ -44,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -85,6 +87,9 @@
     <Compile Include="Pages\Dll.xaml.cs">
       <DependentUpon>Dll.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GalleryUser.xaml.cs">
+      <DependentUpon>GalleryUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Info.xaml.cs">
       <DependentUpon>Info.xaml</DependentUpon>
     </Compile>
@@ -113,6 +118,9 @@
       <DependentUpon>Base.tt</DependentUpon>
     </Compile>
     <Compile Include="users.cs">
+      <DependentUpon>Base.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usersimage.cs">
       <DependentUpon>Base.tt</DependentUpon>
     </Compile>
     <Compile Include="users_to_traits.cs">
@@ -151,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Dll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GalleryUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

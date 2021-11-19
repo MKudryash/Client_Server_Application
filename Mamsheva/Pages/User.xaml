@@ -16,14 +16,15 @@
                 </GroupBox>
                 <GroupBox Header="Дата рождения">
                     <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}"/>
-                 </GroupBox>
+                </GroupBox>
                 <GroupBox Header="Пол">
                     <TextBlock Text="{Binding genders.gender}"/>
-                      </GroupBox>
+                </GroupBox>
                 <GroupBox Header="Качества личности">
                     <ListBox Name="lbTraits" Loaded="lbTraits_Loaded" Uid="{Binding id}"/>
-                 </GroupBox>
+                </GroupBox>
                 <Image x:Name="UserImage" Width="130" Height="130" Loaded="UserImage_Loaded" Uid="{Binding id}"/>
+                <Button x:Name="BtmAddImage" Content="Загрузить/изменить изображение пользователя" Click="BtmAddImage_Click" Uid="{Binding id}"/>
                 <Button Content="Изменить" x:Name="Changebtn" Click="Changebtn_Click" Uid="{Binding id}" />
                 <Button Content="Удалить" x:Name="Delbtn" Click="Delbtn_Click" Uid="{Binding id}"/>
             </StackPanel>
@@ -32,7 +33,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="397*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0"  Orientation="Horizontal">
             <GroupBox Header="От">
@@ -49,6 +50,18 @@
             </GroupBox>
             <Button Name="btnGo" Content="Вывести" Click="Filter" Width="70" Margin="5"/>
             <Button Name="btnReset" Content="Сброс" Click="btnReset_Click" Width="55" Margin="5"/>
+            <GroupBox Header="Сортировка">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <RadioButton Content ="по имени" Click="Sort_Click" Uid="name"/>
+                        <RadioButton Content ="по дате рождения" Click="Sort_Click" Uid="DR"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <RadioButton Content ="по возрастанию" Click="Sort_Click"/>
+                        <RadioButton x:Name="RBReverse" Content ="по убыванию" Click="Sort_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
             <GroupBox Header="Обектов на странице:">
                 <TextBox Name="txtPageCount" TextChanged="txtPageCount_TextChanged"/>
             </GroupBox>
@@ -63,6 +76,6 @@
             </StackPanel>
             <TextBlock Name="txtCurrentPage"/>
         </StackPanel>
-        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1"/>
+        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Height="410" VerticalAlignment="Bottom" Grid.Row="1" />
     </Grid>
 </Page>

@@ -24,7 +24,11 @@
 
     </Page.Resources>
     <Grid>
-        <ScrollViewer>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Margin="0,0,0,-87" Grid.RowSpan="2">
             <GroupBox Header="Введите данные о себе" Margin="20">
                 <StackPanel>
                     <GroupBox Header="Введите логин">
@@ -49,6 +53,8 @@
                             <CheckBox x:Name="d3" />
                         </StackPanel>
                     </GroupBox>
+                    <Image x:Name="UserImage" Width="130" Height="130" Loaded="UserImage_Loaded" Uid="{Binding id}"/>
+                    <Button x:Name="BtmAddImage" Content="Загрузить/изменить изображение пользователя" Click="BtmAddImage_Click" Uid="{Binding id}"/>
                     <Button Margin="0,10" Click="Button_Click" Template="{StaticResource CTbtn1}"/>
                     <Button Content="Назад" Name="btnBack" Click="btnBack_Click" />
                 </StackPanel>

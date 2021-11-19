@@ -34,6 +34,7 @@ namespace Mamsheva
         public virtual DbSet<traits> traits { get; set; }
         public virtual DbSet<users> users { get; set; }
         public virtual DbSet<users_to_traits> users_to_traits { get; set; }
+        public virtual DbSet<usersimage> usersimage { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
