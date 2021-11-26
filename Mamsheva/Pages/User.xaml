@@ -32,10 +32,10 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0"  Orientation="Horizontal">
+        <StackPanel Height="60" Grid.Row="0"  Orientation="Horizontal">
             <GroupBox Header="От">
                 <TextBox Name="txtOT" Width="50"/>
             </GroupBox>
@@ -76,6 +76,6 @@
             </StackPanel>
             <TextBlock Name="txtCurrentPage"/>
         </StackPanel>
-        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Height="410" VerticalAlignment="Bottom" Grid.Row="1" />
+        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}"  VerticalAlignment="Bottom" Grid.Row="1" />
     </Grid>
 </Page>

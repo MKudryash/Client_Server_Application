@@ -216,5 +216,10 @@ namespace Mamsheva.Pages
                 }
             }
         }
+
+        private void BtnGalery_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.MainFrame.Navigate(new GalleryUser(CurrentUser));
+        }
     }
 }

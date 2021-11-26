@@ -9,6 +9,12 @@
       Title="GalleryUser">
 
     <Grid>
-        
+
+        <Image x:Name="UserImage" Width="300" Height="300" Loaded="UserImage_Loaded" Uid="{Binding id}"/>
+        <Button Content="Next" x:Uid="BtnNext" Width="150" Height="35" Margin="559,371,91,44" Click="BtnNext_Click"/>
+        <Button Content="Back" x:Uid="BtnBack" Width="150" Height="35" Margin="65,371,585,44"/>
+        <Button Content="Обновить автар" x:Name="Avatar" Click="Avatar_Click" Width="150" Height="35" Margin="321,405,329,10"/>
+        <Button Content="Назад" x:Name="GoBack" Click="GoBack_Click" Width="150" Height="35" Margin="321,445,329,-30"/>
+
     </Grid>
 </Page>
