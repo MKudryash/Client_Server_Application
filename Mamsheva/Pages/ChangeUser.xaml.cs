@@ -83,7 +83,7 @@ namespace Mamsheva.Pages
         {
             System.Windows.Controls.Image IMG = sender as System.Windows.Controls.Image;
             users U = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == ind);
-            usersimage UI = BaseConnect.BaseModel.usersimage.FirstOrDefault(x => x.id_user == ind);
+            usersimage UI = BaseConnect.BaseModel.usersimage.FirstOrDefault(x => x.id_user == ind&&x.avatar==true);
             BitmapImage BI = new BitmapImage();
             if (UI != null&& UI.avatar==true)
             {

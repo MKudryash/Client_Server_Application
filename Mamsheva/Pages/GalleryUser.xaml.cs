@@ -40,9 +40,9 @@ namespace Mamsheva.Pages
             UI = BaseConnect.BaseModel.usersimage.Where(x => x.id_user == ind).ToList();
             UI.Reverse();
             BitmapImage BI = new BitmapImage();
-            try
+            if (UI != null)
             {
-                if (UI != null)
+                try 
                 {
                     if (UI[userImg].path != null)
                     {
@@ -56,23 +56,9 @@ namespace Mamsheva.Pages
                     }
                     UserImage.Source = BI;
                 }
-                else
-                {
-                    switch (U.gender)
-                    {
-                        case 1:
-                            BI = new BitmapImage(new Uri(@"/Image/man.png", UriKind.Relative));
-                            break;
-                        case 2:
-                            BI = new BitmapImage(new Uri(@"/Image/woman.png", UriKind.Relative));
-                            break;
-                        default:
-                            BI = new BitmapImage(new Uri(@"/Image/other.png", UriKind.Relative));
-                            break;
-                    }
-                }
+                catch { }
             }
-            catch { }
+           
         }
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
@@ -83,12 +69,11 @@ namespace Mamsheva.Pages
                 userImg++;
             else 
                 userImg--;
-
-
-            if (userImg >= UI.Count - 1) 
-                userImg = UI.Count - 1;
-            if (userImg <= 0) 
+            
+            if (userImg > UI.Count-1) 
                 userImg = 0;
+            if (userImg < 0) 
+                userImg = UI.Count - 1;
 
             BitmapImage BI = new BitmapImage();
             if (U != null)
@@ -122,6 +107,7 @@ namespace Mamsheva.Pages
             }
             UI[userImg].avatar = true;
             MessageBox.Show("Аватар успешно изменён!");
+            BaseConnect.BaseModel.SaveChanges();
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
