@@ -10,12 +10,12 @@
 
     <Page.Resources>
         <DataTemplate x:Key="DT1">
-            <StackPanel>
+            <StackPanel x:Name="MassUser">
                 <GroupBox Header="Имя">
                     <TextBlock Text="{Binding name}"/>
                 </GroupBox>
                 <GroupBox Header="Дата рождения">
-                    <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}"/>
+                    <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}" Loaded="TextBlock_Loaded" Uid="{Binding id}"/>
                 </GroupBox>
                 <GroupBox Header="Пол">
                     <TextBlock Text="{Binding genders.gender}"/>

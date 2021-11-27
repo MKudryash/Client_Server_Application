@@ -29,6 +29,7 @@ namespace Mamsheva.Pages
             lbGenderFilter.DisplayMemberPath = "gender";
             lu1 = users;
             DataContext = changePage;
+
         }
         private void lbTraits_Loaded(object sender, RoutedEventArgs e)
         {
@@ -46,7 +47,7 @@ namespace Mamsheva.Pages
                 lu1 = users.Skip(OT).Take(DO - OT).ToList();
             }
             catch
-            {             
+            {
             }
             if (lbGenderFilter.SelectedValue != null)
             {
@@ -61,10 +62,10 @@ namespace Mamsheva.Pages
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             lbUsersList.ItemsSource = users;
             lu1 = users;
-            lbGenderFilter.SelectedIndex = -1; 
+            lbGenderFilter.SelectedIndex = -1;
             txtNameFilter.Clear();
             txtDO.Clear();
             txtOT.Clear();
@@ -198,7 +199,18 @@ namespace Mamsheva.Pages
             if (RBReverse.IsChecked == true) lu1.Reverse();
             lbUsersList.ItemsSource = lu1;
         }
-
-      
+        private void TextBlock_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            int index = Convert.ToInt32(tb.Uid);
+            users us = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == index);
+            var today = DateTime.Today;
+            int Vozrast = today.Year - us.dr.Year;
+            if (us.dr.Date > today.AddYears(Convert.ToInt32(-Vozrast))) Vozrast--;
+            if (us != null && Vozrast > 1)
+            {
+                tb.Foreground = System.Windows.Media.Brushes.Red;
+            }
+        }
     }
 }
