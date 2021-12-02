@@ -123,6 +123,7 @@
     <Compile Include="usersimage.cs">
       <DependentUpon>Base.tt</DependentUpon>
     </Compile>
+    <Compile Include="UsersPartial.cs" />
     <Compile Include="users_to_traits.cs">
       <DependentUpon>Base.tt</DependentUpon>
     </Compile>

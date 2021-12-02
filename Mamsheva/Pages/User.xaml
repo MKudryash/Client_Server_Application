@@ -7,10 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="User">
-
     <Page.Resources>
+        <Style TargetType="StackPanel" x:Key="SPstyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TooOld}" Value="True">
+                    <Setter Property="Background" Value="#FFB873"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <DataTemplate x:Key="DT1">
-            <StackPanel x:Name="MassUser">
+            <StackPanel Style="{StaticResource SPstyle}" >
                 <GroupBox Header="Имя">
                     <TextBlock Text="{Binding name}"/>
                 </GroupBox>
