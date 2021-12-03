@@ -232,6 +232,7 @@
       <DependentUpon>Base.edmx</DependentUpon>
       <LastGenOutput>Base.cs</LastGenOutput>
     </Content>
+    <Resource Include="Image\EmptyImage.jpg" />
     <Resource Include="Image\man.png" />
     <Resource Include="Image\woman.png" />
     <Resource Include="Image\Other.png" />

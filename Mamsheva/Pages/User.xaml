@@ -21,7 +21,7 @@
                     <TextBlock Text="{Binding name}"/>
                 </GroupBox>
                 <GroupBox Header="Дата рождения">
-                    <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}" Loaded="TextBlock_Loaded" Uid="{Binding id}"/>
+                    <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}" Uid="{Binding id}"/>
                 </GroupBox>
                 <GroupBox Header="Пол">
                     <TextBlock Text="{Binding genders.gender}"/>
