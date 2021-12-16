@@ -84,6 +84,9 @@
     <Compile Include="Pages\ChangeUser.xaml.cs">
       <DependentUpon>ChangeUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DiagramPage.xaml.cs">
+      <DependentUpon>DiagramPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Dll.xaml.cs">
       <DependentUpon>Dll.xaml</DependentUpon>
     </Compile>
@@ -156,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ChangeUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DiagramPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
