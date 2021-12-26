@@ -37,10 +37,10 @@ namespace Mamsheva.Pages
             double maxY = gridDiagram.ActualHeight;
             gridDiagram.Children.Clear();//очишаем графическое поле
             gridDiagram.Children.Add(line(maxX / 20, maxY / 20, maxX / 20, maxY - maxY / 20));//помещаем созданный объект на grid
-            gridDiagram.Children.Add(line(maxX / 20, maxY - maxY / 20, maxX - maxX / 20, maxY - maxY / 20));
+            gridDiagram.Children.Add(line(maxX / 20, maxY - maxY / 20, maxX - maxX / 20 - maxX / 200, maxY - maxY / 20));
             double razmer = Math.Sqrt(Math.Pow((maxX - maxX / 20) - (maxX / 20), 2) + Math.Pow((maxY - maxY / 20) - (maxY - maxY / 20), 2));
-            double count = 20, stepX = ((razmer - maxX / 100) / count), stepY = (maxY - maxY / 10) / count;
-
+            double count = 20, stepX = (razmer - maxX / 100) / count, stepY = (maxY - maxY / 10) / count;
+            int k = (int)count;
             for (int i = 1; i < count + 1; i++)
             {
                 Line L = line(maxX / 20 + stepX * i, maxY - maxY / 20, maxX / 20 + stepX * i, maxY - maxY / 20 - stepY * i);
@@ -48,12 +48,10 @@ namespace Mamsheva.Pages
                 L.StrokeThickness = maxX / 100;
                 gridDiagram.Children.Add(L);
                 TextBlock TB = new TextBlock();
-                TB.Width = maxX / 20 + stepX * i;
-                TB.Height = maxY - maxY / 20 - stepY * i;
-                TB.Text = (maxY - maxY / 20 - stepY * i).ToString();
-                //TB.Margin = new Thickness(stepX, 0, 0, 0);
+                TB.Text = ((int)(maxY - maxY / 20 - stepY * k)).ToString();
+                TB.Margin = new Thickness((maxX / 20 + stepX * i) - 7, maxY - maxY / 20 - stepY * i, 0, 0);
                 gridDiagram.Children.Add(TB);
-                //gridDiagram.Children.Add(polygon(maxX / 20 * i, (maxY - maxY / 20) * i, maxX / 20 * i + maxX / 40, maxY / 20));
+                k--;
             }
         }
 

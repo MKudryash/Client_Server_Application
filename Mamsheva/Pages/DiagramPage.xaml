@@ -10,9 +10,6 @@
 
     <Grid>
         <Grid Name="gridDiagram" SizeChanged="gridDiagram_SizeChanged">
-            <Canvas x:Name="Canvass" SizeChanged="gridDiagram_SizeChanged">
-
-            </Canvas>
         </Grid>
     </Grid>
 </Page>
