@@ -17,6 +17,7 @@
         </Style>
         <DataTemplate x:Key="DT1">
             <StackPanel Style="{StaticResource SPstyle}" >
+                
                 <GroupBox Header="Имя">
                     <TextBlock Text="{Binding name}"/>
                 </GroupBox>
