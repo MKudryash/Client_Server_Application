@@ -40,10 +40,9 @@ namespace Mamsheva.Pages
             UI = BaseConnect.BaseModel.usersimage.Where(x => x.id_user == ind).ToList();
             UI.Reverse();
             BitmapImage BI = new BitmapImage();
-            if (UI != null)
+            if (UI.Count>0)
             {
-                try 
-                {
+                
                     if (UI[userImg].path != null)
                     {
                         BI = new BitmapImage(new Uri(UI[userImg].path, UriKind.Relative));
@@ -53,12 +52,15 @@ namespace Mamsheva.Pages
                         BI.BeginInit();
                         BI.StreamSource = new MemoryStream(UI[userImg].image);
                         BI.EndInit();
-                    }
-                    UserImage.Source = BI;
-                }
-                catch { }
+                    }   
             }
-           
+            else
+            {
+
+                        BI = new BitmapImage(new Uri(@"/Image/EmptyImage.jpg", UriKind.Relative));         
+            }
+            UserImage.Source = BI;
+
         }
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)

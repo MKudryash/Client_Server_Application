@@ -11,7 +11,7 @@ namespace Mamsheva
         public MainWindow()
         {
             InitializeComponent();
-            frmMain.Navigate(new Login());
+            frmMain.Navigate(new DiagramPage());
             LoadPages.MainFrame = frmMain;
             BaseConnect.BaseModel = new Entities();
         }
